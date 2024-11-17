@@ -124,4 +124,17 @@ The Movie Search App is a React application that allows users to search for movi
 ---
 
 
+## Development Steps
+
+1. **Set up React front-end and backend API**.
+2. **Test API endpoints**.
+3. **Build components (`MovieSearch`, `MovieList`, `MovieCard`)**.
+4. **Style components with Material-UI**.
+5. **Connect frontend to backend**.
+6. **Test responsiveness and accessibility**.
+7. **Deploy project**.
+
+---
+
+
 
