@@ -3,45 +3,39 @@ import React, { useState } from "react";
 import SearchBar from "./components/SearchBar";
 import MovieList from "./components/MovieList";
 import MovieDetails from "./components/MovieDetails";
-import fetchMovies from "./api/ombd";
+import { fetchMovies, fetchMovieDetails } from './api/ombd'; 
 
 const App = () => {
   const [movies, setMovies] = useState([]);
-  const [selectedMovie, setSelectedMovie] = useState(null); 
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
-  const handleSearch = async (query) => {
-    if (!query) return;
-
-    try {
-      const results = await fetchMovies(query);
-      setMovies(results || []);
-      setSelectedMovie(null); 
-    } catch (error) {
-      console.error("Error fetching movies:", error.message);
-      alert("Failed to fetch movies. Please try again.");
-    }
+  const handleSearch = async (searchTerm) => {
+    const results = await fetchMovies(searchTerm); 
+    setMovies(results.Search); 
   };
 
-  const handleMovieClick = (movie) => {
-    setSelectedMovie(movie); 
+  const handleMovieClick = async (movie) => {
+    const movieDetails = await fetchMovieDetails(movie.imdbID); 
+    setSelectedMovie(movieDetails); 
   };
 
-  const handleBackToResults = () => {
-    setSelectedMovie(null); 
+  const handleBackToList = () => {
+    setSelectedMovie(null);
   };
 
   return (
     <div className="container mx-auto p-4">
-      <SearchBar onSearch={handleSearch} />
-      {selectedMovie ? (
-        <MovieDetails movie={selectedMovie} onBack={handleBackToResults} />
+      <h1 className="text-3xl font-bold mb-4">Find Your Movie</h1>
+      {!selectedMovie ? (
+        <>
+          <SearchBar onSearch={handleSearch} />
+          <MovieList movies={movies} onMovieClick={handleMovieClick} />
+        </>
       ) : (
-        <MovieList movies={movies} onMovieClick={handleMovieClick} />
+        <MovieDetails movie={selectedMovie} onBack={handleBackToList} />
       )}
     </div>
   );
 };
 
 export default App;
-
-

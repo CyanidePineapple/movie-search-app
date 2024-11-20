@@ -1,22 +1,41 @@
 /* eslint-disable no-undef */
 import axios from "axios";
 
-const API_KEY = "807df9a";
-const BASE_URL = "https://www.omdbapi.com/";
+const apiKey = import.meta.env.VITE_OMDB_API_KEY;
 
-const fetchMovies = async (query) => {
+export const fetchMovies = async (query) => {
   try {
-    const response = await axios.get(BASE_URL, {
+    const response = await axios.get("https://www.omdbapi.com/", {
       params: {
         s: query,
-        apikey: API_KEY,
+        apikey: apiKey,
       },
     });
-    return response.data.Search || [];
+    return response.data;
   } catch (error) {
     console.error("Error fetching movies:", error);
-    return [];
+    throw error;
   }
 };
 
-export default fetchMovies;
+export const fetchMovieDetails = async (id) => {
+  try {
+    const response = await axios.get("https://www.omdbapi.com/", {
+      params: {
+        i: id,
+        apikey: apiKey,
+      },
+    });
+
+    const movieData = response.data;
+    if (movieData && movieData.Plot && movieData.Actors && movieData.Genre) {
+      return movieData;
+    } else {
+      console.error("Incomplete movie data:", movieData);
+      return {};
+    }
+  } catch (error) {
+    console.error("Error fetching movie details:", error);
+    throw error;
+  }
+};

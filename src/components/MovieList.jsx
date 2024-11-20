@@ -8,11 +8,15 @@ const MovieList = ({ movies, onMovieClick }) => {
       {movies.map((movie) => (
         <div
           key={movie.imdbID}
-          onClick={() => onMovieClick(movie)} 
+          onClick={() => onMovieClick(movie)}
           className="border p-4 cursor-pointer hover:bg-gray-100 transition"
         >
           <img
-            src={movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/150"}
+            src={
+              movie.Poster !== "N/A"
+                ? movie.Poster
+                : "https://via.placeholder.com/150"
+            }
             alt={movie.Title}
             className="mb-2"
           />
@@ -25,4 +29,3 @@ const MovieList = ({ movies, onMovieClick }) => {
 };
 
 export default MovieList;
-
