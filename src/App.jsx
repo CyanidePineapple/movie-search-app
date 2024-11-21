@@ -59,7 +59,7 @@ function App() {
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center p-4">
       <header className="w-full mb-4 flex justify-center">
         <img
-          src="src/assets/FindYourMovie_Logo-Transparent.png"
+          src="public/assets/FindYourMovie_Logo-Transparent.png"
           alt="Find Your Movie"
           className="w-[500px] h-[500px] cursor-pointer"
           onClick={resetToSearchPage}
