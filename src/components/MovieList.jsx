@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from "react";
+import MovieCard from "./MovieCard"; // Import the MovieCard component
 
 const MovieList = ({ movies, onMovieClick }) => {
   return (
@@ -8,20 +9,10 @@ const MovieList = ({ movies, onMovieClick }) => {
       {movies.map((movie) => (
         <div
           key={movie.imdbID}
-          onClick={() => onMovieClick(movie)}
+          onClick={() => onMovieClick(movie.imdbID)} 
           className="border p-4 cursor-pointer hover:bg-gray-100 transition"
         >
-          <img
-            src={
-              movie.Poster !== "N/A"
-                ? movie.Poster
-                : "https://via.placeholder.com/150"
-            }
-            alt={movie.Title}
-            className="mb-2"
-          />
-          <h3 className="font-bold">{movie.Title}</h3>
-          <p className="text-sm text-gray-600">{movie.Year}</p>
+          <MovieCard movie={movie} />
         </div>
       ))}
     </div>
