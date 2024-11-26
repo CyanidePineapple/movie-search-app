@@ -1,7 +1,6 @@
-/* eslint-disable no-undef */
 import axios from "axios";
 
-const apiKey = import.meta.env.VITE_OMDB_API_KEY; 
+const apiKey = import.meta.env.VITE_OMDB_API_KEY;
 
 export const fetchMovies = async (query) => {
   try {

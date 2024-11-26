@@ -3,7 +3,9 @@
 import React from "react";
 
 const MovieDetails = ({ movie, onBack }) => {
-  if (!movie) return null;
+  if (!movie || Object.keys(movie).length === 0) {
+    return <div>No movie details available.</div>;
+  }
 
   return (
     <div className="p-4">
@@ -46,3 +48,4 @@ const MovieDetails = ({ movie, onBack }) => {
 };
 
 export default MovieDetails;
+
